@@ -99,13 +99,16 @@ WantedBy=multi-user.target<br/>
 
 
 
-# 6.安装prometheus和alertmanager
+# 6.安装prometheus
 
 1.新建相对于的文件夹和对应文件拷贝<br/>
 mkdir -p /opt/prometheus<br/>
-mkdir -p /opt/alertmanager<br/>
-
 
 把rules文件夹复制到/opt/prometheus下<br/>
 把prometheus.yml文件复制到/opt/prometheus下<br/>
-把alertmanager.yaml文件复制到/opt/alertmanager下<br/>
+
+# # # # 重要点运行prometheus之前请修改prometheus.yml对应的ip地址<br/>
+
+docker run  -itd --net=host --restart=always --name=prometheus -p 9090:9090 -v /opt/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  -v /opt/prometheus/rules:/etc/prometheus/rules prom/prometheus  --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+
+
